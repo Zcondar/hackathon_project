@@ -233,12 +233,20 @@ def test():
 @app.route("/")
 def hello():
     choice = give_two()
-    print("first")
-    return render_template('apage_style.html',a=choice[0],b=choice[1],r = roundNum)
+    a = choice[0]
+    b = choice[1]
+    an = a.split(".")[0]
+    an.replace("_"," ",9)
+
+    bn = b.split(".")[0]
+    bn.replace("_"," ",9)
+    return render_template('apage_style.html',a=a,b=b,r = roundNum,an=an,bn=bn)
 
 @app.route('/pickoriginal', methods=['post'])
 def apage():
     global roundNum
+    global done
+    global final_pic
     result = request.form['button']
     handle_selection(result)
     # print(result)
@@ -254,7 +262,23 @@ def apage():
     bn.replace("_"," ",9)
 
     if done == 1:
-        return render_template("apage_style.html", a = final_pic, b = 0)
+        global selected_foods
+        global deselected_foods
+        global give_stack
+        global dishes
+        global give_counter
+
+        selected_foods = []
+        deselected_foods = []
+        give_stack = deque()
+        dishes = []
+        give_counter = -1
+        done = 0
+        roundNum = 0
+        load_csv()
+        n = final_pic.split(".")[0]
+        give_two()
+        return render_template("apage_style_1st_page.html", a = final_pic, n=n)
     else:
         return render_template('apage_style.html',a=a,b=b,r=roundNum,an=an,bn=bn)
 
