@@ -20,11 +20,18 @@
         </div>
     <div class="row">
           <div class="col-md-6 col-12 text-center">
-            <img class="img-fluid" src="images/pizza.jpg" alt="">
+            <!-- <img class="img-fluid" src="{{url_for('static', filename='pizza.jpg')}}" alt=""> -->
+            <form action="/apage" method="post">
+              <input type="hidden" name="button" value="{{a}}">
+              <input type="image" name="button1"
+              src="{{url_for('static', filename='{{a}}.jpg')}}"
+              style="width: 553px; height=553px;"
+              alt="a button should be here">
+            </form>
             <h4>food_description1</h4>
           </div>
           <div class="col-md-6 col-12 text-center mt-md-0 mt-2">
-            <img class="img-fluid" src="images/chicken_wings.jpg" alt="">
+            <img class="img-fluid" src="{{url_for('static', filename='chicken_wings.jpg')}}" alt="">
             <h4>food_description2</h4>
           </div>
         </div>

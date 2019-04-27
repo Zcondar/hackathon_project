@@ -6,27 +6,29 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return render_template('pickoriginal.html')
+    return render_template('pickoriginal.html',a="pizza")
     # return render_template('apage.html',a=1,b=2)
 
 @app.route('/apage', methods=['post'])
 def apage():
 
-    result = int(request.form['button'])
-    # data = request.form
-    left = int(request.form['left'])
-    right = int(request.form['right'])
-    # print(data)
-    if result == left:
-        a = left + 1
-        b = right
-    elif result == right:
-        a = left
-        b = right + 1
-    else:
-        a=0
-        b=0
-        print("Error!")
+    # result = int(request.form['button'])
+    data = request.form
+    # left = int(request.form['left'])
+    # right = int(request.form['right'])
+    print(data)
+    # if result == left:
+    #     a = left + 1
+    #     b = right
+    # elif result == right:
+    #     a = left
+    #     b = right + 1
+    # else:
+    #     a=0
+    #     b=0
+    #     print("Error!")
+    a = "pizza"
+    b = 2
 
     return render_template('apage.html',a=a,b=b)
 
