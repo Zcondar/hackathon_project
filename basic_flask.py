@@ -6,10 +6,10 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return render_template('pickoriginal.html',a="pizza")
+    return render_template('pickoriginal.html',a="pizza.jpg",b="chicken_wings.jpg")
     # return render_template('apage.html',a=1,b=2)
 
-@app.route('/apage', methods=['post'])
+@app.route('/pickoriginal', methods=['post'])
 def apage():
 
     # result = int(request.form['button'])
@@ -27,10 +27,10 @@ def apage():
     #     a=0
     #     b=0
     #     print("Error!")
-    a = "pizza"
-    b = 2
+    a = "pizza.jpg"
+    b = "chicken_wings.jpg"
 
-    return render_template('apage.html',a=a,b=b)
+    return render_template('pickoriginal.html',a=a,b=b)
 
 
 if __name__ == "__main__":

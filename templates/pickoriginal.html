@@ -21,17 +21,23 @@
     <div class="row">
           <div class="col-md-6 col-12 text-center">
             <!-- <img class="img-fluid" src="{{url_for('static', filename='pizza.jpg')}}" alt=""> -->
-            <form action="/apage" method="post">
+            <form action="/pickoriginal" method="post">
               <input type="hidden" name="button" value="{{a}}">
               <input type="image" name="button1"
-              src="{{url_for('static', filename='{{a}}.jpg')}}"
-              style="width: 553px; height=553px;"
+              src="{{url_for('static', filename=a)}}"
+              style="width: 553px; height=333px;"
               alt="a button should be here">
             </form>
             <h4>food_description1</h4>
           </div>
           <div class="col-md-6 col-12 text-center mt-md-0 mt-2">
-            <img class="img-fluid" src="{{url_for('static', filename='chicken_wings.jpg')}}" alt="">
+              <form action="/pickoriginal" method="post">
+                <input type="hidden" name="button" value="{{b}}">
+                <input type="image" name="button1"
+                src="{{url_for('static', filename=b)}}"
+                style="width: 553px; height=333px;"
+                alt="a button should be here">
+              </form>
             <h4>food_description2</h4>
           </div>
         </div>
