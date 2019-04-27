@@ -142,6 +142,7 @@ def elemination():
         if pair[1] > max_food_type_score[1]:
             max_food_type_score = [pair[0], pair[1]]
 
+
     #start dumping others
     if max_food_type_score[1] >= 2:
         dump_others("food_type", max_food_type_score[0])
