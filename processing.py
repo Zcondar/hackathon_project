@@ -14,7 +14,7 @@ dishes = []
 give_counter = 0
 
 def final_choice():
-    random_num = random.randint(0, len(dishes))
+    random_num = random.randint(0, len(dishes)-1)
     return dishes[random_num]["name"] + ".jpg"
     
 
@@ -23,13 +23,15 @@ def handle_selection(selected_name):
     global deselected_foods
     global give_stack
     
-    name = selected_name.split["."][0]
+    print(selected_name)
+    name = selected_name.split(".")[0]
     selected = None
     global give_counter
+    print("checkpoint 1")
 
     #find the food selected
     for food in dishes:
-        if name.equals(food["name"]):
+        if name == food["food_name"]:
             selected = food
             selected_foods.append(food)
             break
@@ -52,20 +54,21 @@ def handle_selection(selected_name):
     elif give_counter == 3:
         elemination()
     '''
+    print(give_counter)
     give_counter += 1
     give_two()
     
 def get_existing_names(cuisine_scores):
     temp = []
     for pair in cuisine_scores:
-        temp.append[pair[0]]
+        temp.append(pair[0])
 
     return temp
 
 def get_existing_types(food_type_scores):
     temp = []
     for pair in food_type_scores:
-        temp.append[pair[0]]
+        temp.append(pair[0])
     
     return temp
 
@@ -79,55 +82,55 @@ def elemination():
     #initial cuisine and food type initialization
     for food in dishes:
         if food["cuisine"] not in get_existing_names(cuisine_scores):
-            cuisine_scores.append((food["cuisine"], 0))
+            cuisine_scores.append([food["cuisine"], 0])
         
         if food["food_type"] not in  get_existing_types(cuisine_scores):
-            cuisine_scores.append((food["food_type"], 0))
+            cuisine_scores.append([food["food_type"], 0])
 
     #update scores based on selections
     for food in selected_foods:
-        if food["is_hot"].equals("TRUE"):
+        if food["is_hot"] == "TRUE":
             is_hot_score += 1
         else:
             is_hot_score -= 1
 
-        if food["has_meat"].equals("TRUE"):
+        if food["has_meat"] == "TRUE":
             has_meat_score += 1
         else:
             has_meat_score -= 1
 
         for pair in cuisine_scores:
-            if pair[0].equals(food["cuisine"]):
+            if pair[0] == food["cuisine"]:
                 pair[1] += 1
         
         for pair in food_type_scores:
-            if pair[0].equals(food["food_type"]):
+            if pair[0] == food["food_type"]:
                 pair[1] += 1
         
     #update scores based on deselections
     for food in deselected_foods:
-        if food["is_hot"].equals("TRUE"):
+        if food["is_hot"] == "TRUE":
             is_hot_score -= 1
         else:
             is_hot_score += 1
 
-        if food["has_meat"].equals("TRUE"):
+        if food["has_meat"] == "TRUE":
             has_meat_score -= 1
         else:
             has_meat_score += 1
 
         for pair in cuisine_scores:
-            if pair[0].equals(food["cuisine"]):
+            if pair[0] == food["cuisine"]:
                 pair[1] -= 1
         
         for pair in food_type_scores:
-            if pair[0].equals(food["food_type"]):
+            if pair[0] == food["food_type"]:
                 pair[1] -= 1
 
 
     #calculate the highest scores
-    max_is_hot_score = max(is_hot_score)
-    max_has_meat_score = max(has_meat_score)
+    max_is_hot_score = is_hot_score
+    max_has_meat_score = has_meat_score
     max_cuisine_score = [0, 0]
 
     for pair in cuisine_scores:
@@ -207,14 +210,15 @@ def test():
 
 @app.route("/")
 def hello():
-    return render_template('pickoriginal.html',a="pizza.jpg",b="chicken_wings.jpg")
+    choice = give_two()
+    return render_template('pickoriginal.html',a=choice[0],b=choice[1])
 
 @app.route('/pickoriginal', methods=['post'])
 def apage():
 
     result = request.form['button']
-    print(result)
-    load_csv()
+    handle_selection(result)
+    # print(result)
     choices = give_two()
     a = choices[0]
     b = choices[1]
@@ -223,5 +227,5 @@ def apage():
 
 if __name__ == "__main__":
     load_csv()
-    print(give_two())
+    # print(give_two())
     app.run(debug=True)
