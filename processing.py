@@ -233,6 +233,7 @@ def test():
 @app.route("/")
 def hello():
     choice = give_two()
+    print("first")
     return render_template('apage_style.html',a=choice[0],b=choice[1],r = roundNum)
 
 @app.route('/pickoriginal', methods=['post'])
