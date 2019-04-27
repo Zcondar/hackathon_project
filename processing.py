@@ -184,7 +184,7 @@ def give_two():
     
     give_stack.append((dishes[first], dishes[second]))
     
-    return (dishes[first]["food_name"] + ".jpg", dishes[second]["food_name"] + ".jgp")
+    return (dishes[first]["food_name"] + ".jpg", dishes[second]["food_name"] + ".jpg")
 
 def load_csv():
     #load the csv into a dictionary
