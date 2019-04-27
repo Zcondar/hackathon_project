@@ -2,6 +2,10 @@ import csv
 import random
 import copy
 from collections import deque
+from flask import Flask
+from flask import render_template
+from flask import request
+app = Flask(__name__)
 
 selected_foods = []
 deselected_foods = []
@@ -201,6 +205,23 @@ def test():
         selected_name = fake_user()
         handle_selection(selected_name)
 
+@app.route("/")
+def hello():
+    return render_template('pickoriginal.html',a="pizza.jpg",b="chicken_wings.jpg")
+
+@app.route('/pickoriginal', methods=['post'])
+def apage():
+
+    result = request.form['button']
+    print(result)
+    load_csv()
+    choices = give_two()
+    a = choices[0]
+    b = choices[1]
+
+    return render_template('pickoriginal.html',a=a,b=b)
+
 if __name__ == "__main__":
     load_csv()
     print(give_two())
+    app.run(debug=True)
