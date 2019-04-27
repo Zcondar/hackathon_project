@@ -34,26 +34,25 @@
 <!--background="images/bg.jpg"-->
 <center>
   <h2>THE CHOSEN ONE</h2>
-   <h3 style="font-family:Helvetica Neue; font-size:1.5em">food name</h3>
-    <form action="/apage" method="post">
-        <article>
-
-        </article>
+   <h3 style="font-family:Helvetica Neue; font-size:1.5em">{{n}}</h3>
+    <!-- <form action="/pickoriginal" method="post">
         <input type="hidden" name="left" value="{{a}}">
-        <input type="hidden" name="right" value="{{b}}">
+        <input type="hidden" name="right" value="{{b}}"> -->
         <input type="image" name="button"
         value="{{a}}"
-        src="images/Banh_Mi_Thit.jpg" style="width: 400px; height:350px;"
+        src="{{url_for('static', filename=a)}}" style="width: 400px; height:350px;"
         alt="a button should be here">
         
-      </form>
+      <!-- </form> -->
     <label>
         <h3 style="font-family: 'Helvetica Neue">Don't like it?</h3>
       </label>
+      <form action="/pickoriginal" method="post">
         <input type="image" name="button"
         value="{{a}}"
-        src="images/button.jpg" style="width: 500px; height:300px;"
+        src="{{url_for('static', filename='button.jpg')}}" style="width: 500px; height:300px;"
         alt="a button should be here">
+        </form>
     </center>
 </body>
 </html>
