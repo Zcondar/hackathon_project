@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
+from processing import give_two, load_csv
 app = Flask(__name__)
 
 
@@ -28,10 +29,18 @@ def apage():
     #     a=0
     #     b=0
     #     print("Error!")
-    a = "Bento_Box.jpg"
-    b = "Bimbimbap.jpg"
+    load_csv()
+    choices = give_two()
+    # a = "Bento_Box.jpg"
+    # b = "Bimbimbap.jpg"
+    a = choices[0]
+    b = choices[1]
 
     return render_template('pickoriginal.html',a=a,b=b)
+
+@app.route("/final")
+def final():
+    return render_template('<insert page name>.html',a="pizza.jpg")
 
 
 if __name__ == "__main__":

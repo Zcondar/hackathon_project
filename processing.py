@@ -2,6 +2,10 @@ import csv
 import random
 import copy
 from collections import deque
+from flask import Flask
+from flask import render_template
+from flask import request
+app = Flask(__name__)
 
 selected_foods = []
 deselected_foods = []
@@ -10,7 +14,7 @@ dishes = None
 give_counter = 0
 
 
-def final_choice():
+# def final_choice():
     
 
 def handle_selection(selected_name):
@@ -90,7 +94,7 @@ def elemination():
         food_type_scores[food["food_type"]] -= 1
 
     max_cuisine_score = 10
-    for item in cuisine
+    # for item in cuisine
 
 def give_two():
     #gives two random selection
@@ -123,7 +127,24 @@ def test():
         selected_name = fake_user()
         handle_selection(selected_name)
 
+@app.route("/")
+def hello():
+    return render_template('pickoriginal.html',a="pizza.jpg",b="chicken_wings.jpg")
+
+@app.route('/pickoriginal', methods=['post'])
+def apage():
+
+    result = request.form['button']
+    print(result)
+    load_csv()
+    choices = give_two()
+    a = choices[0]
+    b = choices[1]
+
+    return render_template('pickoriginal.html',a=a,b=b)
+
 if __name__ == "__main__":
-    dishes = load_csv()
-    dup_dishes = copy.deepcopy(dishes)
-    print(give_two())
+    # dishes = load_csv()
+    # dup_dishes = copy.deepcopy(dishes)
+    # print(give_two())
+    app.run(debug=True)
