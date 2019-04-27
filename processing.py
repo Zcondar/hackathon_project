@@ -199,7 +199,7 @@ def dump_others(attribute, value):
     while i < len(dishes):
         if dishes[i][attribute] != value:
             dishes.pop(i)
-            continue
+            
         i += 1
 
 def give_two():
