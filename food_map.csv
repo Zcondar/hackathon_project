@@ -32,7 +32,7 @@ Image ID,Item Name,Cuisine,Continent,Is Hot (Temp),Has Meat,"Food Type [Key: Noo
 18,Bulgogi_Beef,Korean,Asian,TRUE,TRUE,7
 16,Korean_Fried_Chicken,Korean,Asian,TRUE,TRUE,7
 44,Tacos,South American,Western,TRUE,TRUE,3
-45,Enchiladas,South American,Western,TRUE,TRUE,8
+45,Enchiladas,South American,Asian,TRUE,TRUE,8
 46,Nachos,South American,Western,TRUE,TRUE,8
 43,Paella,Spain,Western,TRUE,TRUE,2
 1,Pad_Thai,Thai,Asian,TRUE,TRUE,1
