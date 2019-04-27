@@ -177,14 +177,14 @@ def dump_others(attribute, value):
 def give_two():
 
     #gives two random selection
-    first = random.randint(0, len(dishes))
-    second = random.randint(0, len(dishes))
+    first = random.randint(0, len(dishes)-1)
+    second = random.randint(0, len(dishes)-1)
     while second == first:
         second = random.randint(0, len(dishes))
     
     give_stack.append((dishes[first], dishes[second]))
     
-    return (dishes[first]["food_name"] + ".jpg", dishes[second]["food_name"] + ".jgp")
+    return (dishes[first]["food_name"] + ".jpg", dishes[second]["food_name"] + ".jpg")
 
 def load_csv():
     #load the csv into a dictionary
