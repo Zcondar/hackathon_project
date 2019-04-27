@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<div style="background-color:#3b5998; padding-top:2px; padding-bottom:2px">
+      <p>
+        <span style="color:#FFFFFF; font-size: 1.2em; font-family:Helvetica Neue; margin: 20px">Feedme</span>
+        </p>
+    </div>
+
   <title>Test Title</title>
   <style type="text/css" media="screen">
     h2 {
     color: #3b5998;
-    font-family: 'Open Sans';
+    font-family:  'Helvetica Neue';
     font-size: 3em;
     margin: 50px;
     ... etc
@@ -33,11 +40,11 @@
         <input type="hidden" name="right" value="{{b}}">
         <input type="image" name="button"
         value="{{a}}"
-        src="{{url_for('static', filename=a)}}" style="width: 400px; height:350px;"
+        src="images/Banh_Mi_Thit.jpg" style="width: 400px; height:350px;"
         alt="a button should be here">
         <input type="image" name="button"
         value="{{b}}"
-        src="{{url_for('static', filename=b)}}" style="width: 400px; height:350px;"
+        src="images/Tteokbokki.jpg" style="width: 400px; height:350px;"
         alt="a button should be here">
         
       </form>
