@@ -15,19 +15,21 @@
 </head>
 <body>
   <p>hello fb hackathon</p>
-    <!-- <form action="/action.py" method="post">
+    <form action="/apage" method="post">
         <article>
           <label>
-            <span>Amount is $5.00</span>
+            <span>This is a button which refreshes the page</span>
           </label>
         </article>
-    
-        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                data-key="pk_test_GfuC2LgG6asgSSaxpR5SoDAM"
-                data-description="A Flask Charge"
-                data-amount="500"
-                data-currency="aud" 
-                data-locale="auto"></script>
-      </form> -->
+        <!-- <input type="hidden" name="test" value="yes"> -->
+        <input type="image" name="button"
+        value="{{a}}"
+        src="http://placehold.it/120x120&text=image{{a}}" style="width: 170px; height=23px;"
+        alt="a button should be here">
+        <input type="image" name="button"
+        value="{{b}}"
+        src="http://placehold.it/120x120&text=image{{b}}" style="width: 170px; height=23px;"
+        alt="a button should be here">
+      </form>
 </body>
 </html>
