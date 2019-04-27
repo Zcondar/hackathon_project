@@ -6,7 +6,7 @@ from collections import deque
 selected_foods = []
 deselected_foods = []
 give_stack = deque()
-dishes = None
+dishes = []
 give_counter = 0
 
 def final_choice():
@@ -15,6 +15,10 @@ def final_choice():
     
 
 def handle_selection(selected_name):
+    global selected_foods
+    global deselected_foods
+    global give_stack
+    
     name = selected_name.split["."][0]
     selected = None
     global give_counter
@@ -167,6 +171,7 @@ def dump_others(attribute, value):
             dishes.pop(i)
 
 def give_two():
+
     #gives two random selection
     first = random.randint(0, len(dishes))
     second = random.randint(0, len(dishes))
@@ -180,11 +185,10 @@ def give_two():
 def load_csv():
     #load the csv into a dictionary
     csvfile = open("food_map.csv", "r")
-
+    global dishes
     reader = csv.DictReader(csvfile, fieldnames = ["image_id", "food_name", "cuisine", "is_hot", "has_meat", "food_type"], skipinitialspace=True)
     dishes = list(reader)
     dishes.pop(0)
-    print(dishes[0])
 
 def fake_user():
     pick = random.randint(0, 2)
