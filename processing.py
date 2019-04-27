@@ -12,11 +12,19 @@ deselected_foods = []
 give_stack = deque()
 dishes = []
 give_counter = 0
+done = 0
+final_pic = ""
 
 def final_choice():
     random_num = random.randint(0, len(dishes)-1)
-    return dishes[random_num]["name"] + ".jpg"
-    
+    global done
+    done = 1
+    global final_pic
+    for row in dishes:
+        print(row)
+
+    final_pic = dishes[random_num]["food_name"] + ".jpg"
+    print(final_pic)
 
 def handle_selection(selected_name):
     global selected_foods
@@ -29,7 +37,8 @@ def handle_selection(selected_name):
     global give_counter
     print("checkpoint 1")
 
-    #find the food selected
+    #find the food selectedclear
+    
     for food in dishes:
         if name == food["food_name"]:
             selected = food
@@ -46,15 +55,15 @@ def handle_selection(selected_name):
         selected_foods.append(previous_feed[1])
         deselected_foods.append(previous_feed[0])
     
-    #if counter reaches 5, start elimination process and make final choice
-    if give_counter == 5:
+    print("counter is " + str(give_counter))
+    #if counter reaches 4, start elimination process and make final choice
+    if give_counter == 4:
         elemination()
         final_choice()
     '''    
     elif give_counter == 3:
         elemination()
     '''
-    print(give_counter)
     give_counter += 1
     give_two()
     
@@ -144,8 +153,9 @@ def elemination():
 
     #counter to check if we are about to remove everything
     to_remove = {}
-    to_remove.clear()
+    
     #start dumping others
+    '''
     if max_food_type_score[1] >= 2:
         i = 0
         while i < len(dishes):
@@ -153,8 +163,7 @@ def elemination():
                 to_remove[dishes[i]["food_name"]] = 1
             i += 1
 
-    if max_food_type_score[1] >= 2:
-        dump_others("food_type", max_food_type_score[0])
+    
 
 
     if max_cuisine_score[1] >= 3:
@@ -193,8 +202,10 @@ def elemination():
 
     if len(to_remove.keys()) >= len(dishes):
         return dishes[randint(0,len(dishes)-1)]
+    '''
+    if max_food_type_score[1] >= 2:
+        dump_others("food_type", max_food_type_score[0])
 
-    
     if max_cuisine_score[1] >= 3:
         dump_others("cuisine", max_cuisine_score[1])
 
@@ -229,6 +240,7 @@ def dump_others(attribute, value):
     while i < len(dishes):
         if dishes[i][attribute] != value:
             dishes.pop(i)
+        i += 1
 
 def give_two():
 
@@ -276,9 +288,12 @@ def apage():
     a = choices[0]
     b = choices[1]
 
-    return render_template('pickoriginal.html',a=a,b=b)
+    if done == 1:
+        return render_template("pickoriginal.html", a = final_pic, b = 0)
+    else:
+        return render_template('pickoriginal.html',a=a,b=b)
 
 if __name__ == "__main__":
     load_csv()
     # print(give_two())
-    app.run(debug=True)
+    app.run(debug=False)
