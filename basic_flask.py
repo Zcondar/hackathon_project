@@ -12,10 +12,11 @@ def hello():
 def apage():
 
     result = int(request.form['button'])
-    # data = request.form
+    #data = request.form
     left = int(request.form['left'])
     right = int(request.form['right'])
-    # print(data)
+    #print(data)
+    
     if result == left:
         a = left + 1
         b = right
