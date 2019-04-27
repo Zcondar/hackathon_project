@@ -38,7 +38,7 @@ def handle_selection(selected_name):
     print("checkpoint 1")
 
     #find the food selectedclear
-    
+
     for food in dishes:
         if name == food["food_name"]:
             selected = food
@@ -87,7 +87,7 @@ def elemination():
     is_hot_score = 0
     has_meat_score = 0
     food_type_scores = [] 
-    
+    asian = 0
     #initial cuisine and food type initialization
     for food in dishes:
         if food["cuisine"] not in get_existing_names(cuisine_scores):
@@ -107,6 +107,9 @@ def elemination():
             has_meat_score += 1
         else:
             has_meat_score -= 1
+
+        if food["continent"] == "Asian":
+            asian += 1
 
         for pair in cuisine_scores:
             if pair[0] == food["cuisine"]:
@@ -151,63 +154,16 @@ def elemination():
         if pair[1] > max_food_type_score[1]:
             max_food_type_score = [pair[0], pair[1]]
 
-    #counter to check if we are about to remove everything
-    to_remove = {}
-    
     #start dumping others
-    '''
-    if max_food_type_score[1] >= 2:
-        i = 0
-        while i < len(dishes):
-            if dishes[i]["food_type"] == max_food_type_score[0]:
-                to_remove[dishes[i]["food_name"]] = 1
-            i += 1
-
-    
-
-
-    if max_cuisine_score[1] >= 3:
-        i = 0
-        while i < len(dishes):
-            if dishes[i]["cuisine"] == max_cuisine_score[0]:
-                to_remove[dishes[i]["food_name"]] = 1
-            i += 1
-    
-    if max_is_hot_score >= 4:
-        i = 0
-        while i < len(dishes):
-            if dishes[i]["is_hot"] == "FALSE":
-                to_remove[dishes[i]["food_name"]] = 1
-            i += 1
-
-    elif max_is_hot_score <= -4:
-        i = 0
-        while i < len(dishes):
-            if dishes[i]["is_hot"] == "TRUE":
-                to_remove[dishes[i]["food_name"]] = 1
-            i += 1
-
-    if max_has_meat_score >= 4:
-        i = 0
-        while i < len(dishes):
-            if dishes[i]["has_meat"] == "FALSE":
-                to_remove[dishes[i]["food_name"]] = 1
-            i += 1
-    elif max_has_meat_score <= -4:
-        i = 0
-        while i < len(dishes):
-            if dishes[i]["has_meat"] == "TRUE":
-                to_remove[dishes[i]["food_name"]] = 1
-            i += 1
-
-    if len(to_remove.keys()) >= len(dishes):
-        return dishes[randint(0,len(dishes)-1)]
-    '''
+   
     if max_food_type_score[1] >= 2:
         dump_others("food_type", max_food_type_score[0])
 
     if max_cuisine_score[1] >= 3:
         dump_others("cuisine", max_cuisine_score[1])
+
+    if asian >= 3:
+        dump_others("continent", "Asian")
 
     if max_is_hot_score >= 4:
         i = 0
@@ -258,7 +214,7 @@ def load_csv():
     #load the csv into a dictionary
     csvfile = open("food_map.csv", "r")
     global dishes
-    reader = csv.DictReader(csvfile, fieldnames = ["image_id", "food_name", "cuisine", "is_hot", "has_meat", "food_type"], skipinitialspace=True)
+    reader = csv.DictReader(csvfile, fieldnames = ["image_id", "food_name", "cuisine", "continent", "is_hot", "has_meat", "food_type"], skipinitialspace=True)
     dishes = list(reader)
     dishes.pop(0)
 
