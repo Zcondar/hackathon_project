@@ -14,6 +14,7 @@ dishes = []
 give_counter = 0
 done = 0
 final_pic = ""
+roundNum = 1
 
 def final_choice():
     random_num = random.randint(0, len(dishes)-1)
@@ -232,22 +233,29 @@ def test():
 @app.route("/")
 def hello():
     choice = give_two()
-    return render_template('pickoriginal.html',a=choice[0],b=choice[1])
+    return render_template('apage_style.html',a=choice[0],b=choice[1],r = roundNum)
 
 @app.route('/pickoriginal', methods=['post'])
 def apage():
-
+    global roundNum
     result = request.form['button']
     handle_selection(result)
     # print(result)
     choices = give_two()
     a = choices[0]
     b = choices[1]
+    roundNum += 1
+
+    an = a.split(".")[0]
+    an.replace("_"," ",9)
+
+    bn = b.split(".")[0]
+    bn.replace("_"," ",9)
 
     if done == 1:
-        return render_template("pickoriginal.html", a = final_pic, b = 0)
+        return render_template("apage_style.html", a = final_pic, b = 0)
     else:
-        return render_template('pickoriginal.html',a=a,b=b)
+        return render_template('apage_style.html',a=a,b=b,r=roundNum,an=an,bn=bn)
 
 if __name__ == "__main__":
     load_csv()
