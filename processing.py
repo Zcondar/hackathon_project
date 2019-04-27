@@ -13,8 +13,9 @@ give_stack = deque()
 dishes = None
 give_counter = 0
 
-
-# def final_choice():
+def final_choice():
+    random_num = random.randint(0, len(dishes))
+    return dishes[random_num]["name"] + ".jpg"
     
 
 def handle_selection(selected_name):
@@ -30,6 +31,7 @@ def handle_selection(selected_name):
             break
 
     #retrieve previous selections and update the selected and deselected list
+    #WARNING: NOT YET POPED UNSELECTED
     previous_feed = give_stack.pop()
     if selected is previous_feed[0]:
         selected_foods.append(previous_feed[0])
@@ -49,19 +51,34 @@ def handle_selection(selected_name):
     give_counter += 1
     give_two()
     
+def get_existing_names(cuisine_scores):
+    temp = []
+    for pair in cuisine_scores:
+        temp.append[pair[0]]
+
+    return temp
+
+def get_existing_types(food_type_scores):
+    temp = []
+    for pair in food_type_scores:
+        temp.append[pair[0]]
+    
+    return temp
+
 def elemination():
-    cuisine_scores = {}
+
+    cuisine_scores = []
     is_hot_score = 0
     has_meat_score = 0
-    food_type_scores = {} 
+    food_type_scores = [] 
     
-    #initial cuizin and food type initialization
+    #initial cuisine and food type initialization
     for food in dishes:
-        if food["cuisine"] not in cuisine_scores.keys():
-            cuisine_scores[food["cuisine"]] = 0
+        if food["cuisine"] not in get_existing_names(cuisine_scores):
+            cuisine_scores.append((food["cuisine"], 0))
         
-        if food["food_type"] not in  food_type_scores.keys():
-            food_type_scores[food["food_type"]] = 0
+        if food["food_type"] not in  get_existing_types(cuisine_scores):
+            cuisine_scores.append((food["food_type"], 0))
 
     #update scores based on selections
     for food in selected_foods:
@@ -75,8 +92,13 @@ def elemination():
         else:
             has_meat_score -= 1
 
-        cuisine_scores[food["cuisine"]] += 1
-        food_type_scores[food["food_type"]] += 1
+        for pair in cuisine_scores:
+            if pair[0].equals(food["cuisine"]):
+                pair[1] += 1
+        
+        for pair in food_type_scores:
+            if pair[0].equals(food["food_type"]):
+                pair[1] += 1
         
     #update scores based on deselections
     for food in deselected_foods:
@@ -90,11 +112,63 @@ def elemination():
         else:
             has_meat_score += 1
 
-        cuisine_scores[food["cuisine"]] -= 1
-        food_type_scores[food["food_type"]] -= 1
+        for pair in cuisine_scores:
+            if pair[0].equals(food["cuisine"]):
+                pair[1] -= 1
+        
+        for pair in food_type_scores:
+            if pair[0].equals(food["food_type"]):
+                pair[1] -= 1
 
-    max_cuisine_score = 10
-    # for item in cuisine
+
+    #calculate the highest scores
+    max_is_hot_score = max(is_hot_score)
+    max_has_meat_score = max(has_meat_score)
+    max_cuisine_score = [0, 0]
+
+    for pair in cuisine_scores:
+        if pair[1] > max_cuisine_score[1]:
+            max_cuisine_score = [pair[0], pair[1]]
+
+    max_food_type_score = [0, 0]
+    for pair in food_type_scores:
+        if pair[1] > max_food_type_score[1]:
+            max_food_type_score = [pair[0], pair[1]]
+
+    #start dumping others
+    if max_food_type_score[1] >= 2:
+        dump_others("food_type", max_food_type_score[0])
+    
+    if max_cuisine_score[1] >= 3:
+        dump_others("cuisine", max_cuisine_score[1])
+    
+    if max_is_hot_score >= 4:
+        i = 0
+        while i < len(dishes):
+            if dishes["is_hot"].equals("FALSE"):
+                dishes.pop(i)
+    elif max_is_hot_score <= -4:
+        i = 0
+        while i < len(dishes):
+            if dishes["is_hot"].equals("TRUE"):
+                dishes.pop(i)
+
+    if max_has_meat_score >= 4:
+        i = 0
+        while i < len(dishes):
+            if dishes["has_meat"].equals("FALSE"):
+                dishes.pop(i)
+    elif max_has_meat_score <= -4:
+        i = 0
+        while i < len(dishes):
+            if dishes["has_meat"].equals("TRUE"):
+                dishes.pop(i)
+
+def dump_others(attribute, value):
+    i = 0
+    while i < len(dishes):
+        if dishes[i][attribute] != value:
+            dishes.pop(i)
 
 def give_two():
     #gives two random selection
@@ -112,9 +186,9 @@ def load_csv():
     csvfile = open("food_map.csv", "r")
 
     reader = csv.DictReader(csvfile, fieldnames = ["image_id", "food_name", "cuisine", "is_hot", "has_meat", "food_type"], skipinitialspace=True)
-    data = list(reader)
-    data.pop(0)
-    return data
+    dishes = list(reader)
+    dishes.pop(0)
+    print(dishes[0])
 
 def fake_user():
     pick = random.randint(0, 2)
@@ -144,7 +218,6 @@ def apage():
     return render_template('pickoriginal.html',a=a,b=b)
 
 if __name__ == "__main__":
-    # dishes = load_csv()
-    # dup_dishes = copy.deepcopy(dishes)
-    # print(give_two())
+    load_csv()
+    print(give_two())
     app.run(debug=True)
