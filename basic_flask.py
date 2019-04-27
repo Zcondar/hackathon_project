@@ -20,6 +20,5 @@ def apage():
     b = 2
     return render_template('apage.html',a=a,b=b)
 
-
 if __name__ == "__main__":
     app.run(debug=True)
