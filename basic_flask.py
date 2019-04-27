@@ -6,7 +6,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return render_template('apage.html',a=1,b=2)
+    return render_template('pickoriginal.html')
+    # return render_template('apage.html',a=1,b=2)
 
 @app.route('/apage', methods=['post'])
 def apage():
