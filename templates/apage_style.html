@@ -33,11 +33,11 @@
         <input type="hidden" name="right" value="{{b}}">
         <input type="image" name="button"
         value="{{a}}"
-        src="images/Banh_Mi_Thit.jpg" style="width: 400px; height:350px;"
+        src="{{url_for('static', filename=a)}}" style="width: 400px; height:350px;"
         alt="a button should be here">
         <input type="image" name="button"
         value="{{b}}"
-        src="images/Tteokbokki.jpg" style="width: 400px; height:350px;"
+        src="{{url_for('static', filename=b)}}" style="width: 400px; height:350px;"
         alt="a button should be here">
         
       </form>
