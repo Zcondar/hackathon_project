@@ -12,11 +12,12 @@ def hello():
 @app.route('/pickoriginal', methods=['post'])
 def apage():
 
-    # result = int(request.form['button'])
-    data = request.form
+    result = request.form['button']
+    # data = request.form
     # left = int(request.form['left'])
     # right = int(request.form['right'])
-    print(data)
+    # print(data)
+    print(result)
     # if result == left:
     #     a = left + 1
     #     b = right
@@ -27,8 +28,8 @@ def apage():
     #     a=0
     #     b=0
     #     print("Error!")
-    a = "pizza.jpg"
-    b = "chicken_wings.jpg"
+    a = "Bento_Box.jpg"
+    b = "Bimbimbap.jpg"
 
     return render_template('pickoriginal.html',a=a,b=b)
 
