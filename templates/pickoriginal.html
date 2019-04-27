@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap Portfolio Page Template</title>
     <!-- Bootstrap -->
-    <link href="css/bootstrap-4.3.1.css" rel="stylesheet">
+    <link href="{{ url_for('static',filename='bootstrap-4.3.1.css') }}" rel="stylesheet">
   </head>
   <body style="background-color:blue>
 <section> </section>
@@ -20,11 +20,24 @@
         </div>
     <div class="row">
           <div class="col-md-6 col-12 text-center">
-            <img class="img-fluid" src="pizza.jpg" alt="">
+            <!-- <img class="img-fluid" src="{{url_for('static', filename='pizza.jpg')}}" alt=""> -->
+            <form action="/pickoriginal" method="post">
+              <input type="hidden" name="button" value="{{a}}">
+              <input type="image" name="button1"
+              src="{{url_for('static', filename=a)}}"
+              style="width: 553px; height=333px;"
+              alt="a button should be here">
+            </form>
             <h4>food_description1</h4>
           </div>
           <div class="col-md-6 col-12 text-center mt-md-0 mt-2">
-            <img class="img-fluid" src="images/chicken_wings.jpg" alt="">
+              <form action="/pickoriginal" method="post">
+                <input type="hidden" name="button" value="{{b}}">
+                <input type="image" name="button1"
+                src="{{url_for('static', filename=b)}}"
+                style="width: 553px; height=333px;"
+                alt="a button should be here">
+              </form>
             <h4>food_description2</h4>
           </div>
         </div>
