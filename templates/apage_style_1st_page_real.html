@@ -30,15 +30,17 @@
   
   </style>
 </head>
-<body background= "images/bg.jpg" style="background-size:100%">
+<body background="{{url_for('static', filename='bg.jpg')}}" style="background-size:100%">
 <center>
   <h2>FEED ME</h2>
    <p style="font-family:Helvetica Neue; font-size:1.5em"> Undecided? </p>
    <p style="font-family:Helvetica Neue; font-size:1.5em"> Click the button to start now. </p>
+        <form action="/pickoriginal" method="post">
         <input type="image" name="button"
         value="{{a}}"
-        src="images/start.png" style="width: 200px; height:70px;"
+        src="{{url_for('static', filename='start.png')}}" style="width: 200px; height:70px;"
         alt="a button should be here">
+        </form>
     </center>
 </body>
 </html>

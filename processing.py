@@ -11,10 +11,10 @@ selected_foods = []
 deselected_foods = []
 give_stack = deque()
 dishes = []
-give_counter = 0
+give_counter = -1
 done = 0
 final_pic = ""
-roundNum = 1
+roundNum = 0
 
 def final_choice():
     random_num = random.randint(0, len(dishes)-1)
@@ -165,6 +165,8 @@ def elemination():
 
     if asian >= 3:
         dump_others("continent", "Asian")
+    else:
+        dump_other("continent","Western")
 
     if max_is_hot_score >= 4:
         i = 0
@@ -197,6 +199,7 @@ def dump_others(attribute, value):
     while i < len(dishes):
         if dishes[i][attribute] != value:
             dishes.pop(i)
+            continue
         i += 1
 
 def give_two():
@@ -240,7 +243,9 @@ def hello():
 
     bn = b.split(".")[0]
     bn.replace("_"," ",9)
-    return render_template('apage_style.html',a=a,b=b,r = roundNum,an=an,bn=bn)
+    # return render_template('apage_style.html',a=a,b=b,r = roundNum,an=an,bn=bn)
+    return render_template('apage_style_1st_page_real.html',a=a,b=b,r = roundNum,an=an,bn=bn)
+
 
 @app.route('/pickoriginal', methods=['post'])
 def apage():
